@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lợi Ích Kinh Tế — Khái niệm, Quan hệ &amp; Vai trò Nhà nước</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-deep:#191009;
+    --bg-panel:#241608;
+    --bg-panel-2:#2c1a0c;
+    --gold:#c8992e;
+    --gold-soft:#e3c26b;
+    --lacquer-red:#7d1f1c;
+    --lacquer-red-bright:#a8302a;
+    --cream:#efe4cd;
+    --muted:#a8927a;
+    --line:#4a3420;
+    --shadow:0 20px 50px rgba(0,0,0,0.45);
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg-deep);
+    color:var(--cream);
+    font-family:'Be Vietnam Pro',sans-serif;
+    font-weight:400;
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--gold);color:#1a1006;}
+
+  h1,h2,h3{
+    font-family:'Spectral',serif;
+    font-weight:500;
+    margin:0;
+    color:var(--gold-soft);
+  }
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    font-size:0.72rem;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  a{color:var(--gold-soft);}
+
+  /* ---------- background texture ---------- */
+  .grain{
+    position:fixed; inset:0; pointer-events:none; z-index:1;
+    opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100vh;
+    position:relative;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    text-align:center;
+    padding:80px 24px 60px;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(200,153,46,0.14), transparent 55%),
+      radial-gradient(ellipse at 80% 110%, rgba(125,31,28,0.35), transparent 60%),
+      var(--bg-deep);
+  }
+  .hero-frame{
+    position:absolute; inset:22px;
+    border:1px solid var(--line);
+    pointer-events:none;
+  }
+  .hero-frame::before, .hero-frame::after{
+    content:"";
+    position:absolute; width:26px; height:26px;
+    border:1px solid var(--gold);
+    opacity:0.7;
+  }
+  .hero-frame::before{ top:-1px; left:-1px; border-right:none; border-bottom:none;}
+  .hero-frame::after{ bottom:-1px; right:-1px; border-left:none; border-top:none;}
+
+  .hero .eyebrow{ justify-content:center; margin-bottom:26px;}
+  .hero .eyebrow::after{
+    content:"";
+    width:22px;height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    letter-spacing:0.01em;
+    line-height:1.05;
+    max-width:16ch;
+  }
+  .hero h1 em{
+    font-style:italic; color:var(--lacquer-red-bright);
+    -webkit-text-stroke:0;
+  }
+  .hero p.sub{
+    max-width:520px;
+    margin:26px auto 0;
+    color:var(--muted);
+    font-size:1.02rem;
+  }
+
+  .scale-wrap{ margin:52px auto 10px; width:min(340px, 70vw);}
+  .scale-wrap svg{ width:100%; height:auto; overflow:visible;}
+  .beam{ transform-origin:170px 62px; animation:tip 5.5s ease-in-out infinite;}
+  @keyframes tip{
+    0%,100%{ transform:rotate(-3.2deg);}
+    50%{ transform:rotate(3.2deg);}
+  }
+  .pan-left{ transform-origin:70px 0; animation:panL 5.5s ease-in-out infinite;}
+  .pan-right{ transform-origin:270px 0; animation:panR 5.5s ease-in-out infinite;}
+  @keyframes panL{ 0%,100%{transform:translateY(-10px) rotate(0deg);} 50%{transform:translateY(9px) rotate(0deg);} }
+  @keyframes panR{ 0%,100%{transform:translateY(9px) rotate(0deg);} 50%{transform:translateY(-10px) rotate(0deg);} }
+
+  .scroll-cue{
+    margin-top:44px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:0.68rem; letter-spacing:0.14em;
+    color:var(--muted); text-transform:uppercase;
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .scroll-cue span{
+    width:1px; height:34px; background:linear-gradient(var(--gold), transparent);
+    animation:pulse 1.8s ease-in-out infinite;
+  }
+  @keyframes pulse{ 0%,100%{opacity:.25;} 50%{opacity:1;} }
+
+  /* ---------- spine layout ---------- */
+  .spine-area{ position:relative; max-width:960px; margin:0 auto; padding:0 24px 40px;}
+  .spine-line{
+    position:absolute; left:50%; top:0; bottom:0;
+    width:1px; background:linear-gradient(var(--line), var(--gold) 4%, var(--gold) 96%, var(--line));
+    transform:translateX(-50%);
+    z-index:0;
+  }
+  @media (max-width:780px){ .spine-line{ left:26px; } }
+
+  .chapter{
+    position:relative;
+    padding:90px 0 10px;
+    z-index:1;
+    opacity:0;
+    transform:translateY(28px);
+    transition:opacity .8s ease, transform .8s ease;
+  }
+  .chapter.in{ opacity:1; transform:translateY(0);}
+
+  .chap-node{
+    position:absolute; left:50%; top:90px;
+    transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:50%;
+    background:var(--bg-panel);
+    border:1px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Spectral',serif; font-style:italic; font-size:1.3rem; color:var(--gold-soft);
+    box-shadow:var(--shadow);
+    z-index:2;
+  }
+  @media (max-width:780px){ .chap-node{ left:26px; } }
+
+  .chap-head{ text-align:center; max-width:640px; margin:0 auto 6px;}
+  .chap-head h2{ font-size:clamp(1.5rem,3.4vw,2.2rem); margin-top:26px;}
+  .chap-head .eyebrow{ justify-content:center;}
+  @media (max-width:780px){
+    .chap-head{ text-align:left; margin-left:70px; max-width:none;}
+    .chap-head .eyebrow{ justify-content:flex-start;}
+  }
+
+  .panel{
+    background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+    border:1px solid var(--line);
+    border-radius:2px;
+    padding:34px clamp(20px,5vw,46px);
+    margin-top:34px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .panel::before{
+    content:"";
+    position:absolute; top:14px; left:14px; right:14px; bottom:14px;
+    border:1px solid rgba(200,153,46,0.16);
+    pointer-events:none;
+  }
+
+  .kv{ margin-bottom:22px;}
+  .kv:last-child{ margin-bottom:0;}
+  .kv .label{
+    font-family:'JetBrains Mono',monospace; font-size:0.7rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:6px; display:block;
+  }
+  .kv p{ margin:0; color:var(--cream); }
+  .kv p b{ color:var(--gold-soft); font-weight:600;}
+
+  hr.rule{ border:none; border-top:1px solid var(--line); margin:26px 0;}
+
+  .pillbar{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;}
+  .pill{
+    font-family:'JetBrains Mono',monospace; font-size:0.72rem;
+    padding:6px 12px; border:1px solid var(--line); border-radius:999px;
+    color:var(--muted);
+  }
+
+  /* duality cards (chapter 3) */
+  .duality{ display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:8px;}
+  @media (max-width:600px){ .duality{ grid-template-columns:1fr; } }
+  .duality .card{
+    border:1px solid var(--line); padding:20px; border-radius:2px;
+    background:rgba(0,0,0,0.15);
+  }
+  .duality .card.unity{ border-top:3px solid var(--gold); }
+  .duality .card.conflict{ border-top:3px solid var(--lacquer-red-bright); }
+  .duality h4{
+    font-family:'Spectral',serif; font-style:italic; font-weight:500;
+    margin:0 0 10px; font-size:1.05rem; color:var(--cream);
+  }
+  .duality .card.unity h4{ color:var(--gold-soft); }
+  .duality .card.conflict h4{ color:var(--lacquer-red-bright); }
+  .duality p{ margin:0; font-size:0.94rem; color:var(--muted); }
+
+  .relations-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;
+  }
+  @media (max-width:600px){ .relations-grid{ grid-template-columns:1fr; } }
+  .rel-card{
+    border:1px solid var(--line); padding:18px 20px; border-radius:2px;
+    display:flex; gap:14px; align-items:flex-start;
+    background:rgba(0,0,0,0.12);
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .rel-card:hover{ border-color:var(--gold); transform:translateY(-3px);}
+  .rel-num{
+    font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:0.8rem;
+    border:1px solid var(--gold); border-radius:50%;
+    width:26px;height:26px; display:flex;align-items:center;justify-content:center;
+    flex-shrink:0;
+  }
+  .rel-card p{ margin:0; font-size:0.92rem; color:var(--cream);}
+  .rel-card p b{ color:var(--gold-soft);}
+
+  .factors{ display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin-top:8px;}
+  @media (max-width:780px){ .factors{ grid-template-columns:repeat(2,1fr);} }
+  .factor{
+    text-align:center; padding:16px 10px; border:1px solid var(--line);
+  }
+  .factor .n{ font-family:'Spectral',serif; font-style:italic; color:var(--gold); font-size:1.4rem; display:block; margin-bottom:6px;}
+  .factor span.t{ font-size:0.82rem; color:var(--muted); line-height:1.4; display:block;}
+
+  /* chapter 4 sub blocks a-d */
+  .subblocks{ margin-top:8px; display:flex; flex-direction:column; gap:16px;}
+  .subblock{
+    border-left:2px solid var(--gold);
+    padding:4px 0 4px 20px;
+  }
+  .subblock .tag{
+    font-family:'JetBrains Mono',monospace; color:var(--gold); font-size:0.75rem; margin-bottom:6px; display:block;
+  }
+  .subblock h4{
+    font-family:'Spectral',serif; font-weight:500; color:var(--gold-soft); margin:0 0 8px; font-size:1.08rem;
+  }
+  .subblock ul{ margin:0; padding-left:18px; color:var(--muted); font-size:0.92rem;}
+  .subblock ul li{ margin-bottom:6px;}
+  .subblock ul li::marker{ color:var(--gold);}
+  .subblock p{ margin:0; color:var(--muted); font-size:0.92rem;}
+
+  /* ---------- case study ---------- */
+  .case-story{
+    position:relative;
+    padding:8px 8px 8px 46px;
+    margin-bottom:28px;
+  }
+  .case-quote-mark{
+    position:absolute; left:-4px; top:-14px;
+    font-family:'Spectral',serif; font-size:3.4rem; color:var(--gold);
+    opacity:0.55; line-height:1;
+  }
+  .case-story p{ margin:0; color:var(--cream); font-size:1rem;}
+  .case-story b{ color:var(--gold-soft); font-weight:600;}
+
+  .case-chain{
+    display:flex; align-items:center; justify-content:center;
+    gap:10px; flex-wrap:wrap;
+    padding:24px 10px; margin-bottom:6px;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+  }
+  .chain-node{
+    display:flex; flex-direction:column; align-items:center; gap:6px;
+    border:1px solid var(--line); border-radius:2px;
+    padding:16px 20px; min-width:130px;
+    background:rgba(0,0,0,0.15);
+  }
+  .chain-node.highlight{ border-color:var(--gold); background:rgba(200,153,46,0.08);}
+  .chain-label{
+    font-family:'JetBrains Mono',monospace; font-size:0.68rem;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--muted);
+  }
+  .chain-value{ font-family:'Spectral',serif; font-style:italic; font-size:1.15rem; color:var(--gold-soft);}
+  .chain-value small{ font-family:'Be Vietnam Pro',sans-serif; font-style:normal; font-size:0.6rem; color:var(--muted); display:block; margin-top:2px;}
+  .chain-arrow{ color:var(--gold); font-size:1.3rem; opacity:0.7;}
+
+  /* ---------- AI transparency ---------- */
+  .ai-section{
+    padding:110px 24px 40px;
+    text-align:center;
+    background:
+      radial-gradient(ellipse at 50% 0%, rgba(200,153,46,0.08), transparent 60%),
+      var(--bg-deep);
+    border-top:1px solid var(--line);
+  }
+  .ai-inner{ max-width:760px; margin:0 auto;}
+  .ai-inner h2{
+    font-size:clamp(1.6rem,3.6vw,2.3rem);
+    margin-top:20px;
+  }
+  .ai-inner h2 em{ font-style:italic; color:var(--lacquer-red-bright);}
+  .ai-sub{ color:var(--muted); font-size:0.96rem; max-width:520px; margin:18px auto 0;}
+
+  .ai-cards{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+    margin-top:48px;
+  }
+  @media (max-width:680px){ .ai-cards{ grid-template-columns:1fr; } }
+  .ai-card{
+    border:1px solid var(--line); border-radius:2px;
+    padding:34px 20px; background:linear-gradient(160deg, var(--bg-panel), var(--bg-panel-2));
+    transition:border-color .25s ease, transform .25s ease;
+  }
+  .ai-card:hover{ border-color:var(--gold); transform:translateY(-4px);}
+  .ai-icon{ font-size:1.4rem; color:var(--gold); display:block; margin-bottom:14px;}
+  .ai-card h3{
+    font-family:'Spectral',serif; font-weight:500; font-size:1.15rem; color:var(--gold-soft);
+    margin:0 0 10px;
+  }
+  .ai-role{
+    font-family:'JetBrains Mono',monospace; font-size:0.74rem;
+    color:var(--muted); letter-spacing:0.03em;
+  }
+
+  /* footer */
+  footer{
+    text-align:center; padding:80px 24px 60px;
+    color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:0.75rem;
+    letter-spacing:0.06em;
+  }
+  footer .mark{ color:var(--gold); font-size:1rem; display:block; margin-bottom:10px; font-family:'Spectral',serif; font-style:italic;}
+
+  @media (prefers-reduced-motion: reduce){
+    .beam,.pan-left,.pan-right,.scroll-cue span{ animation:none !important;}
+    .chapter{ transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<section class="hero">
+  <div class="hero-frame"></div>
+  <div class="eyebrow">Kinh tế chính trị Mác – Lênin</div>
+  <h1>Lợi Ích Kinh Tế &amp; <em>Sự Hài Hòa</em> Các Quan Hệ</h1>
+  <p class="sub">Từ khái niệm, bản chất đến các mối quan hệ lợi ích trong nền sản xuất xã hội — và vai trò của Nhà nước trong việc giữ cho cán cân ấy không nghiêng lệch.</p>
+
+  <div class="scale-wrap">
+    <svg viewBox="0 0 340 210" fill="none">
+      <line x1="170" y1="62" x2="170" y2="188" stroke="#4a3420" stroke-width="2"/>
+      <polygon points="150,196 190,196 182,206 158,206" fill="#241608" stroke="#4a3420"/>
+      <circle cx="170" cy="60" r="5" fill="#c8992e"/>
+      <g class="beam">
+        <line x1="70" y1="60" x2="270" y2="60" stroke="#c8992e" stroke-width="2.5"/>
+        <g class="pan-left">
+          <line x1="70" y1="60" x2="70" y2="90" stroke="#7d1f1c" stroke-width="1.4"/>
+          <path d="M45 90 Q70 112 95 90" stroke="#a8302a" stroke-width="2" fill="none"/>
+        </g>
+        <g class="pan-right">
+          <line x1="270" y1="60" x2="270" y2="90" stroke="#7d1f1c" stroke-width="1.4"/>
+          <path d="M245 90 Q270 112 295 90" stroke="#a8302a" stroke-width="2" fill="none"/>
+        </g>
+      </g>
+    </svg>
+  </div>
+
+  <div class="scroll-cue"><span></span>Cuộn xuống</div>
+</section>
+
+<div class="spine-area">
+  <div class="spine-line"></div>
+
+  <!-- CHAPTER I — CASE STUDY -->
+  <div class="chapter" data-ch>
+    <div class="chap-node">I</div>
+    <div class="chap-head">
+      <div class="eyebrow">Tình huống thực tế</div>
+      <h2>Study Case — Hạt Cà Phê Đắk Lắk</h2>
+    </div>
+    <div class="panel">
+      <div class="case-story">
+        <span class="case-quote-mark">“</span>
+        <p>Anh Khánh trồng cà phê ở Đắk Lắk. Giá cà phê nhân anh bán cho thương lái: <b>40.000đ/kg</b>. Cùng lúc đó, tại TP.HCM, một ly cà phê từ hạt đó được bán <b>85.000đ/ly</b> tại chuỗi Highland Coffee. Người tiêu dùng trả giá cao, nhưng người trồng ra hạt cà phê lại nhận phần nhỏ nhất trong chuỗi giá trị.</p>
+      </div>
+
+      <div class="case-chain">
+        <div class="chain-node">
+          <span class="chain-label">Nông dân</span>
+          <span class="chain-value">40.000đ<small>/kg nhân</small></span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node">
+          <span class="chain-label">Thương lái</span>
+          <span class="chain-value">?</span>
+        </div>
+        <div class="chain-arrow">→</div>
+        <div class="chain-node highlight">
+          <span class="chain-label">Highland Coffee</span>
+          <span class="chain-value">85.000đ<small>/ly</small></span>
+        </div>
+      </div>
+
+      <hr class="rule">
+      <span class="label">01 · Phân tích chuỗi quan hệ lợi ích kinh tế</span>
+
+      <div class="duality" style="margin-top:14px;">
+        <div class="card conflict">
+          <h4>Ai hưởng lợi nhiều nhất?</h4>
+          <p>Chuỗi bán lẻ (Highland Coffee) hưởng lợi nhiều nhất nhờ bán sản phẩm cuối với giá cao và bảo toàn lợi nhuận bằng hợp đồng cố định giá. Người nông dân nhận phần nhỏ nhất và gánh chịu toàn bộ rủi ro thua lỗ khi giá thế giới giảm.</p>
+        </div>
+        <div class="card unity">
+          <h4>Có phản ánh đúng đóng góp thực tế?</h4>
+          <p><b style="color:var(--lacquer-red-bright)">Không.</b> Điều này vi phạm nguyên tắc "lợi ích phù hợp với vai trò và đóng góp của các chủ thể". Sự mâu thuẫn trong phân phối làm tổn hại lợi ích người sản xuất và suy giảm động lực lao động của nông dân.</p>
+        </div>
+      </div>
+
+      <hr class="rule">
+      <span class="label">02 · Nhà nước can thiệp để bảo đảm công bằng cho nông dân</span>
+      <div class="subblocks" style="margin-top:14px;">
+        <div class="subblock">
+          <span class="tag">Liên kết 4 Nhà</span>
+          <h4>Thúc đẩy mô hình liên kết "nhóm lợi ích"</h4>
+          <p>Khuyến khích mô hình liên kết 4 nhà — nhà nông, nhà doanh nghiệp, nhà khoa học, nhà nước — để tạo sự gắn kết bền vững, chia sẻ rủi ro giá cả thay vì để nông dân đơn độc đối phó với thị trường.</p>
+        </div>
+        <div class="subblock">
+          <span class="tag">Phân phối</span>
+          <h4>Điều hòa phân phối thu nhập</h4>
+          <p>Thực hiện chính sách phân phối công bằng, kết hợp công bằng theo mức độ và theo chức năng; chăm lo, hỗ trợ đời sống và bảo đảm mức sống tối thiểu cho nông dân khi gặp khó khăn, thiên tai.</p>
+        </div>
+        <div class="subblock">
+          <span class="tag">Pháp lý</span>
+          <h4>Bảo vệ quyền lợi pháp lý</h4>
+          <p>Xây dựng môi trường pháp luật thông thoáng để bảo vệ lợi ích chính đáng của nông dân trong giao dịch, ký kết hợp đồng thu mua, tránh bị ép giá.</p>
+        </div>
+        <div class="subblock">
+          <span class="tag">Hạ tầng</span>
+          <h4>Đầu tư hạ tầng và lực lượng sản xuất</h4>
+          <p>Đầu tư kết cấu hạ tầng nông nghiệp — giao thông, kho bãi — và chuyển giao công nghệ để giúp nông dân giảm chi phí sản xuất, nâng cao chất lượng và giá trị hạt cà phê.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER II -->
+  <div class="chapter" data-ch>
+    <div class="chap-node">II</div>
+    <div class="chap-head">
+      <div class="eyebrow">Nền tảng</div>
+      <h2>Khái niệm, Bản chất &amp; Biểu hiện</h2>
+    </div>
+    <div class="panel">
+      <div class="kv">
+        <span class="label">Khái niệm</span>
+        <p>Là <b>lợi ích vật chất</b>, thu được khi con người thực hiện các hoạt động kinh tế nhằm thỏa mãn nhu cầu của mình — được nhận thức và đặt trong mối quan hệ xã hội ứng với trình độ phát triển nhất định của nền sản xuất.</p>
+      </div>
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Bản chất</span>
+        <p>Phản ánh <b>mục đích, động cơ</b> của các quan hệ giữa các chủ thể trong nền sản xuất xã hội. Các quan hệ kinh tế, xét cho cùng, biểu hiện trước hết dưới hình thức lợi ích và mang tính lịch sử.</p>
+      </div>
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Biểu hiện</span>
+        <p>Gắn với từng chủ thể sẽ có biểu hiện khác nhau:</p>
+        <div class="pillbar">
+          <span class="pill">Chủ doanh nghiệp → lợi nhuận</span>
+          <span class="pill">Người lao động → thu nhập</span>
+        </div>
+      </div>
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Vai trò</span>
+        <p>Đóng vai trò <b>quyết định</b>, là động lực thúc đẩy hoạt động của cá nhân, tổ chức và toàn xã hội — trong đó lợi ích cá nhân chính đáng là cơ sở, nền tảng của các lợi ích khác.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER III -->
+  <div class="chapter" data-ch>
+    <div class="chap-node">III</div>
+    <div class="chap-head">
+      <div class="eyebrow">Thực tiễn</div>
+      <h2>Vai trò của Lợi Ích Kinh Tế tại Việt Nam</h2>
+    </div>
+    <div class="panel">
+      <div class="kv">
+        <span class="label">Cơ sở thúc đẩy các lợi ích khác</span>
+        <p>Lợi ích kinh tế tạo điều kiện vật chất để hình thành và thực hiện lợi ích chính trị, xã hội, văn hóa. Mọi vận động của lịch sử, xét đến cùng, đều xoay quanh vấn đề lợi ích — đặc biệt là lợi ích kinh tế.</p>
+      </div>
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Điều kiện phát huy</span>
+        <p>Chỉ phát huy khi có sự <b>đồng thuận, thống nhất</b>. Theo đuổi lợi ích không chính đáng, bất hợp pháp sẽ trở thành trở ngại cho phát triển.</p>
+      </div>
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Thực tiễn Việt Nam</span>
+        <p>Đảng và Nhà nước ta coi lợi ích kinh tế là động lực của các hoạt động kinh tế, tôn trọng lợi ích cá nhân chính đáng, và luôn quán triệt nguyên tắc đổi mới <b>“dân là gốc”</b> — vì lợi ích của nhân dân.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER IV -->
+  <div class="chapter" data-ch>
+    <div class="chap-node">IV</div>
+    <div class="chap-head">
+      <div class="eyebrow">Tương tác</div>
+      <h2>Quan Hệ Lợi Ích Kinh Tế</h2>
+    </div>
+    <div class="panel">
+      <div class="kv">
+        <span class="label">Khái niệm</span>
+        <p>Là các tương tác — theo chiều dọc, chiều ngang, hoặc quốc tế — giữa con người, cộng đồng, tổ chức kinh tế nhằm xác lập các lợi ích kinh tế, gắn liền với trình độ của lực lượng sản xuất và kiến trúc thượng tầng.</p>
+      </div>
+
+      <hr class="rule">
+      <span class="label">Tính hai mặt</span>
+      <div class="duality">
+        <div class="card unity">
+          <h4>Sự thống nhất</h4>
+          <p>Xảy ra khi các chủ thể hành động vì mục tiêu chung, hoặc một chủ thể là bộ phận của chủ thể khác. Ví dụ: doanh nghiệp làm ăn tốt → đời sống người lao động nâng cao; người lao động tích cực → doanh nghiệp tăng lợi nhuận.</p>
+        </div>
+        <div class="card conflict">
+          <h4>Sự mâu thuẫn</h4>
+          <p>Xảy ra khi các chủ thể hành động theo phương thức đối lập (làm hàng giả, trốn thuế) hoặc mâu thuẫn trực tiếp trong phân phối. Mâu thuẫn về lợi ích là <b style="color:var(--lacquer-red-bright)">cội nguồn của xung đột xã hội</b>.</p>
+        </div>
+      </div>
+
+      <hr class="rule">
+      <span class="label">Nhân tố ảnh hưởng</span>
+      <div class="factors">
+        <div class="factor"><span class="n">01</span><span class="t">Trình độ phát triển của lực lượng sản xuất</span></div>
+        <div class="factor"><span class="n">02</span><span class="t">Địa vị của chủ thể trong quan hệ sản xuất</span></div>
+        <div class="factor"><span class="n">03</span><span class="t">Chính sách phân phối thu nhập của Nhà nước</span></div>
+        <div class="factor"><span class="n">04</span><span class="t">Hội nhập kinh tế quốc tế</span></div>
+      </div>
+
+      <hr class="rule">
+      <span class="label">Các quan hệ cơ bản</span>
+      <div class="relations-grid">
+        <div class="rel-card"><span class="rel-num">a</span><p><b>Lao động ↔ Sử dụng lao động</b><br>Tiền lương đối trọng với lợi nhuận.</p></div>
+        <div class="rel-card"><span class="rel-num">b</span><p><b>Giữa những người sử dụng lao động</b><br>Vừa là đối tác, vừa là đối thủ cạnh tranh.</p></div>
+        <div class="rel-card"><span class="rel-num">c</span><p><b>Giữa những người lao động</b><br>Cạnh tranh việc làm, hoặc đoàn kết qua Công đoàn.</p></div>
+        <div class="rel-card"><span class="rel-num">d</span><p><b>Cá nhân – Nhóm – Xã hội</b><br>Phát huy "lợi ích nhóm" tích cực, đấu tranh với "lợi ích nhóm" tiêu cực.</p></div>
+      </div>
+
+      <hr class="rule">
+      <div class="kv">
+        <span class="label">Phương thức thực hiện</span>
+        <p>Theo <b>nguyên tắc thị trường</b> và theo <b>chính sách nhà nước</b> / vai trò của các tổ chức xã hội.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHAPTER V -->
+  <div class="chapter" data-ch>
+    <div class="chap-node">V</div>
+    <div class="chap-head">
+      <div class="eyebrow">Điều tiết</div>
+      <h2>Vai Trò Của Nhà Nước Trong Bảo Đảm Hài Hòa</h2>
+    </div>
+    <div class="panel">
+      <div class="kv">
+        <span class="label">Hài hòa các lợi ích kinh tế</span>
+        <p>Là sự thống nhất biện chứng giữa lợi ích của các chủ thể, trong đó hạn chế mâu thuẫn, xung đột và khuyến khích mặt thống nhất để tạo động lực phát triển. Sự can thiệp của Nhà nước là <b>tất yếu khách quan</b>.</p>
+      </div>
+
+      <div class="subblocks">
+        <div class="subblock">
+          <span class="tag">A · Bảo vệ &amp; tạo môi trường</span>
+          <h4>Bảo vệ lợi ích hợp pháp, tạo môi trường thuận lợi</h4>
+          <ul>
+            <li>Giữ vững ổn định chính trị</li>
+            <li>Xây dựng môi trường pháp luật thông thoáng, tuân thủ thông lệ quốc tế</li>
+            <li>Đầu tư kết cấu hạ tầng (đường bộ, điện, nước, thông tin...)</li>
+            <li>Ban hành chính sách vĩ mô phù hợp, tạo lập văn hóa kinh doanh năng động, giữ chữ tín</li>
+          </ul>
+        </div>
+        <div class="subblock">
+          <span class="tag">B · Điều hòa</span>
+          <h4>Điều hòa lợi ích Cá nhân – Doanh nghiệp – Xã hội</h4>
+          <p>Sử dụng chính sách phân phối thu nhập để ngăn chặn sự chênh lệch quá đáng. Đẩy mạnh phát triển lực lượng sản xuất và khoa học – công nghệ để tạo điều kiện vật chất thực hiện công bằng xã hội.</p>
+        </div>
+        <div class="subblock">
+          <span class="tag">C · Kiểm soát</span>
+          <h4>Kiểm soát, ngăn ngừa lợi ích tiêu cực</h4>
+          <ul>
+            <li>Kết hợp hai quan niệm công bằng: theo mức độ và theo chức năng</li>
+            <li>Chăm lo đời sống, xóa đói giảm nghèo, chính sách ưu đãi xã hội, đền ơn đáp nghĩa; khuyến khích làm giàu hợp pháp</li>
+            <li>Tuyên truyền nâng cao nhận thức về phân phối thu nhập</li>
+            <li>Chống thu nhập bất hợp pháp: bộ máy liêm chính, kiểm soát thu nhập công chức, công khai minh bạch để xóa "xin – cho", "sân sau", nâng cao hiệu lực thanh tra</li>
+          </ul>
+        </div>
+        <div class="subblock">
+          <span class="tag">D · Giải quyết</span>
+          <h4>Giải quyết mâu thuẫn</h4>
+          <p>Chủ động phát hiện và giải quyết kịp thời, dựa trên nguyên tắc: có sự tham gia của các bên, có nhân nhượng, và đặt lợi ích đất nước lên trên hết. Khi xung đột bùng phát (đình công, bãi công), Nhà nước đóng vai trò hòa giải chính.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<section class="ai-section">
+  <div class="ai-inner">
+    <div class="eyebrow" style="justify-content:center;">Ghi nhận công cụ</div>
+    <h2>Minh Bạch Ứng Dụng <em>Trí Tuệ Nhân Tạo</em> (AI)</h2>
+    <p class="ai-sub">Danh sách các công cụ AI mà nhóm đã sử dụng để hỗ trợ nghiên cứu lý luận, lập trình giao diện và tối ưu hóa nội dung.</p>
+
+    <div class="ai-cards">
+      <div class="ai-card">
+        <span class="ai-icon">◈</span>
+        <h3>ChatGPT</h3>
+        <span class="ai-role">Cấu trúc &amp; Nội dung</span>
+      </div>
+      <div class="ai-card">
+        <span class="ai-icon">✦</span>
+        <h3>Gemini</h3>
+        <span class="ai-role">Nghiên cứu &amp; Ý tưởng</span>
+      </div>
+      <div class="ai-card">
+        <span class="ai-icon">❁</span>
+        <h3>Claude AI</h3>
+        <span class="ai-role">Tối ưu UI/UX &amp; Ngôn ngữ</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="mark">✦</span>
+  © 2024 Thuyết trình Kinh tế Chính trị — Dựa trên giáo trình Mác – Lênin
+</footer>
+
+<script>
+  const chapters = document.querySelectorAll('[data-ch]');
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+    });
+  }, { threshold: 0.15 });
+  chapters.forEach(c=>io.observe(c));
+</script>
+
+</body>
+</html>
