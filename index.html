@@ -157,7 +157,7 @@
 
   .chapter{
     position:relative;
-    padding:90px 0 10px;
+    padding:120px 0 40px; /* Tăng padding để thoáng hơn */
     z-index:1;
     opacity:0;
     transform:translateY(28px);
@@ -166,7 +166,7 @@
   .chapter.in{ opacity:1; transform:translateY(0);}
 
   .chap-node{
-    position:absolute; left:50%; top:90px;
+    position:absolute; left:50%; top:120px; /* Cập nhật theo padding mới */
     transform:translate(-50%,-50%);
     width:64px; height:64px; border-radius:50%;
     background:var(--bg-panel);
@@ -178,8 +178,20 @@
   }
   @media (max-width:780px){ .chap-node{ left:26px; } }
 
-  .chap-head{ text-align:center; max-width:640px; margin:0 auto 6px;}
-  .chap-head h2{ font-size:clamp(1.5rem,3.4vw,2.2rem); margin-top:26px;}
+  .chap-head{
+    text-align:center;
+    max-width:720px;
+    margin:0 auto 10px;
+    position: relative;
+    z-index: 2;
+  }
+  /* Tạo lớp nền để che đường kẻ dọc khi đi qua tiêu đề */
+  .chap-head h2, .chap-head .eyebrow {
+    background: var(--bg-deep); /* Trùng màu nền để che đường kẻ */
+    display: inline-flex;
+    padding: 0 20px;
+  }
+  .chap-head h2{ font-size:clamp(1.5rem,3.4vw,2.2rem); margin-top:20px;}
   .chap-head .eyebrow{ justify-content:center;}
   @media (max-width:780px){
     .chap-head{ text-align:left; margin-left:70px; max-width:none;}
@@ -480,32 +492,39 @@
   <div class="chapter" data-ch>
     <div class="chap-node">II</div>
     <div class="chap-head">
-      <div class="eyebrow">Nền tảng</div>
+      <div class="eyebrow">Nền tảng lý luận</div>
       <h2>Khái niệm, Bản chất &amp; Biểu hiện</h2>
     </div>
     <div class="panel">
       <div class="kv">
-        <span class="label">Khái niệm</span>
-        <p>Là <b>lợi ích vật chất</b>, thu được khi con người thực hiện các hoạt động kinh tế nhằm thỏa mãn nhu cầu của mình — được nhận thức và đặt trong mối quan hệ xã hội ứng với trình độ phát triển nhất định của nền sản xuất.</p>
+        <span class="label">01 · Khái niệm cốt lõi</span>
+        <p>Lợi ích kinh tế là <b>lợi ích vật chất</b> thu được từ các hoạt động kinh tế. Nó không chỉ là sự thỏa mãn nhu cầu cá nhân đơn thuần, mà phải được <b>nhận thức</b> và đặt trong mối quan hệ xã hội cụ thể của nền sản xuất.</p>
       </div>
+
       <hr class="rule">
+
       <div class="kv">
-        <span class="label">Bản chất</span>
-        <p>Phản ánh <b>mục đích, động cơ</b> của các quan hệ giữa các chủ thể trong nền sản xuất xã hội. Các quan hệ kinh tế, xét cho cùng, biểu hiện trước hết dưới hình thức lợi ích và mang tính lịch sử.</p>
+        <span class="label">02 · Bản chất sâu xa</span>
+        <p>Phản ánh <b>mục đích và động cơ</b> của các quan hệ giữa các chủ thể. Như Ph. Ăngghen khẳng định: Các quan hệ kinh tế luôn biểu hiện trước hết dưới "hình thức lợi ích". Nó mang tính lịch sử — thay đổi theo từng giai đoạn phát triển của xã hội.</p>
       </div>
+
       <hr class="rule">
+
       <div class="kv">
-        <span class="label">Biểu hiện</span>
-        <p>Gắn với từng chủ thể sẽ có biểu hiện khác nhau:</p>
+        <span class="label">03 · Biểu hiện thực tế</span>
+        <p>Mỗi vị trí trong nền kinh tế sẽ có cách nhận lợi ích khác nhau. Đây là <b>nguyên tắc đảm bảo lợi ích phù hợp với vai trò</b>:</p>
         <div class="pillbar">
-          <span class="pill">Chủ doanh nghiệp → lợi nhuận</span>
-          <span class="pill">Người lao động → thu nhập</span>
+          <span class="pill">Chủ doanh nghiệp ➔ Lợi nhuận</span>
+          <span class="pill">Người lao động ➔ Thu nhập (Tiền lương)</span>
+          <span class="pill">Nhà quản lý ➔ Thù lao quản lý</span>
         </div>
       </div>
+
       <hr class="rule">
+
       <div class="kv">
-        <span class="label">Vai trò</span>
-        <p>Đóng vai trò <b>quyết định</b>, là động lực thúc đẩy hoạt động của cá nhân, tổ chức và toàn xã hội — trong đó lợi ích cá nhân chính đáng là cơ sở, nền tảng của các lợi ích khác.</p>
+        <span class="label">04 · Vai trò quyết định</span>
+        <p>Dù trong ngắn hạn con người có thể theo đuổi lý tưởng tinh thần, nhưng về <b>lâu dài và xuyên suốt</b>, lợi ích vật chất là động lực quyết định thúc đẩy hoạt động của cá nhân và toàn xã hội. Thiếu đi lợi ích kinh tế sẽ làm <b>suy giảm động lực</b> lao động.</p>
       </div>
     </div>
   </div>
